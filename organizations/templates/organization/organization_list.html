@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Gradient Background for the Button */
+  .btn-gradient {
+    background: linear-gradient(90deg, #28a745, #218838);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Button Hover Effect */
+  .btn-gradient:hover {
+    background: linear-gradient(90deg, #218838, #1c7430);
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Add Button Focus Style */
+  .btn-gradient:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.5);
+  }
+
+  /* Icon Styling for Consistency */
+  .btn-gradient i {
+    margin-right: 8px;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+
+  /* Organization List Styles */
+  .list-group-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .list-group-item:hover {
+    background: #f8f9fa;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Organization Title Style */
+  .list-group-item strong {
+    font-size: 18px;
+    color: #343a40;
+  }
+
+  /* Superuser Links Style */
+  .list-group-item a {
+    margin-left: 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .list-group-item a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="container py-5">
+  <!-- Page Header -->
+  <h2 class="text-center mb-4 text-primary">Organizations</h2>
+
+  <!-- Organization List -->
+  <ul class="list-group mb-4">
+    {% for org in object_list %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <strong>{{ org.name }}</strong>
+        {% if user.is_superuser %}
+          <span>
+            <a href="{% url 'organization-update' org.id %}">Update</a> |
+            <a href="{% url 'organization-delete' org.id %}">Delete</a>
+          </span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Create Organization Button (Superuser Only) -->
+  {% if user.is_superuser %}
+    <div class="text-center my-4">
+      <a href="{% url 'organization-create' %}" class="btn btn-lg btn-gradient text-white shadow-lg">
+        <i class="bi bi-plus-circle"></i> Create New Organization
+      </a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    /* Background and Text Styling for the Dashboard */
+    h1 {
+      font-size: 36px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    /* Container for the content */
+    .dashboard-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 40px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border-radius: 15px;
+      color: white;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button Styling */
+    .btn-dashboard {
+      background: linear-gradient(90deg, #0072ff, #6a11cb);
+      color: white;
+      padding: 12px 24px;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button Hover Effect */
+    .btn-dashboard:hover {
+      background: linear-gradient(90deg, #2575fc, #6a11cb);
+      transform: scale(1.05);
+    }
+
+    /* Link Text Styling */
+    .btn-dashboard:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 114, 255, 0.4);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .btn-dashboard {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+
+  <div class="dashboard-container">
+    <h1>Welcome to the Dashboard</h1>
+    <p>Here you can manage organizations, users, and more.</p>
+    <a href="{% url 'organization-list' %}" class="btn-dashboard">Go to Organizations</a>
+  </div>
+  
+{% endblock %}

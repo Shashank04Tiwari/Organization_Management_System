@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Form Card Styling */
+  .form-card {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #f8f9fa;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Form Title Styling */
+  .form-card h2 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  /* Button Styling */
+  .btn-assign {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-assign:hover {
+    background: linear-gradient(90deg, #0056b3, #003f7d);
+    transform: scale(1.02);
+  }
+
+  .btn-assign:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+</style>
+
+<div class="container">
+  <div class="form-card">
+    <h2>Assign Role</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ form.as_p }}
+      </div>
+      <button type="submit" class="btn btn-assign">Assign</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

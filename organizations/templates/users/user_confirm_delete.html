@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  /* Full Page Styling */
+  body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff4e50, #f9d423);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+
+  /* Confirmation Container */
+  .confirmation-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+      max-width: 600px;
+      width: 100%;
+  }
+
+  /* Fade-in Animation */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(-20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  /* Header Styling */
+  .confirmation-container h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #ff4e50;
+  }
+
+  /* Button Styling */
+  .confirmation-container button {
+      padding: 12px 24px;
+      background: #ff4e50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin-right: 10px;
+  }
+
+  .confirmation-container button:hover {
+      background: #e84142;
+      transform: scale(1.05);
+  }
+
+  /* Cancel Link Styling */
+  .confirmation-container a {
+      display: inline-block;
+      padding: 12px 24px;
+      text-decoration: none;
+      background: #f9d423;
+      color: #333;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .confirmation-container a:hover {
+      background: #e6c112;
+      transform: scale(1.05);
+  }
+</style>
+
+<div class="confirmation-container">
+  <h1>Are you sure you want to delete user: <span style="color: #f94144;">{{ user.username }}</span>?</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+    <a href="{% url 'user-list' %}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

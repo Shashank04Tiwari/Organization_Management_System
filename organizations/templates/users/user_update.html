@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  /* Main container styling */
+  .container {
+      margin-top: 30px;
+      padding: 30px;
+      background: #f4f7fb;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  /* Header Styling */
+  h1 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 20px;
+  }
+
+  h2 {
+      font-size: 22px;
+      color: #0072ff;
+      margin-bottom: 15px;
+  }
+
+  /* Form Styling */
+  form {
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  form label {
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+      color: #333;
+  }
+
+  form select, form button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: #fff;
+      transition: all 0.3s ease;
+  }
+
+  form select:focus, form button:focus {
+      border-color: #0072ff;
+      box-shadow: 0 0 5px rgba(0, 114, 255, 0.4);
+      outline: none;
+  }
+
+  form button {
+      background-color: #0072ff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+  }
+
+  form button:hover {
+      background-color: #0056b3;
+  }
+
+  /* Danger Button Styling */
+  .btn-danger {
+      background-color: #dc3545;
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.3s ease;
+  }
+
+  .btn-danger:hover {
+      background-color: #c82333;
+  }
+
+  /* Text Styling */
+  p {
+      font-size: 16px;
+      color: #f39c12;
+      margin-top: 20px;
+      text-align: center;
+  }
+
+  .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #0072ff;
+      text-decoration: none;
+  }
+
+  .back-link:hover {
+      text-decoration: underline;
+  }
+
+</style>
+
+<div class="container">
+  <h1>Update User: {{ user.username }}</h1>
+
+  {% if request.user.role.name == "admin" %}
+    <h2>Update User Role</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <label for="role">Role</label>
+      <select name="role">
+        {% for role in all_role %}
+          <option value="{{ role.id }}" {% if role.id == user.role.id %} selected {% endif %}>
+            {{ role.name }}
+          </option>
+        {% endfor %}
+      </select>
+      <button type="submit">Update Role</button>
+    </form>
+
+    <h2>Delete User</h2>
+    <form method="POST" action="{% url 'user-delete' user.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn-danger">Delete User</button>
+    </form>
+  {% else %}
+    <p>You do not have permission to update or delete this user.</p>
+  {% endif %}
+  
+  <a href="{% url 'user-list' %}" class="back-link">Back to User List</a>
+</div>
+
+{% endblock %}

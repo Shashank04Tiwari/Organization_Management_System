@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Card Container Styling */
+  .form-card {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #f8f9fa;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Form Title Styling */
+  .form-card h2 {
+    text-align: center;
+    color: #17a2b8;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  /* Save Button Styling */
+  .btn-save {
+    background: linear-gradient(90deg, #17a2b8, #138496);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-save:hover {
+    background: linear-gradient(90deg, #138496, #0d6efd);
+    transform: scale(1.02);
+  }
+
+  .btn-save:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(23, 162, 184, 0.5);
+  }
+
+  /* Input Field Styling */
+  .form-card input,
+  .form-card select,
+  .form-card textarea {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+  }
+</style>
+
+<div class="container">
+  <div class="form-card">
+    <h2>Create or Edit User</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ form.as_p }}
+      </div>
+      <button type="submit" class="btn btn-save">Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
